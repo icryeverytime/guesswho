@@ -12,7 +12,6 @@
         android:orientation="vertical">
         <LinearLayout
             android:background="@drawable/linearlayouborder"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -60,5 +59,17 @@
                 android:background="@drawable/linearlayouborder"
                 android:layout_margin="0dp"/>
         </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Juego multiplayer"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Juego local"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informacion de como jugar"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
