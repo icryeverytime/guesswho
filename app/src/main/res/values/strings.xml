@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="nombre">Primere Nombre:</string>
+    <string name="nombre">Primer Nombre:</string>
     <string name="nombreDesc">Primer nombre del usuario</string>
 
     <string name="apellido">Primer apellido:</string>
@@ -30,4 +30,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="btnJuegoReiniciar">Reiniciar</string>
+    <string name="btnJuegoQuitar">Salir</string>
+
 </resources>

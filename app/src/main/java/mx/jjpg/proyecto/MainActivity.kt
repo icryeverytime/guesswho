@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity() {
         but.setOnClickListener{
             val queue = Volley.newRequestQueue(this)
             //val url="http://192.168.173.220:5000/login"
-            val url = "http://192.168.1.67:5000/login"
+            //val url = "http://192.168.1.67:5000/login"
+
+            //hamachi
+            val url = "http://25.83.103.75:5000/login"
+
             val json= JSONObject()
             json.put("usuario",user.text.toString())
             json.put("password",contra.text.toString())

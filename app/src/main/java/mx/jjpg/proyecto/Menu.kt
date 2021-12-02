@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import mx.jjpg.proyecto.R
@@ -23,6 +24,11 @@ class Menu : AppCompatActivity() {
         val sname=getIntent().getStringExtra("snombre")
         val correo=getIntent().getStringExtra("correo")
         val imagen=getIntent().getStringExtra("imagen")
+        val local:Button=findViewById(R.id.btnJugarLocal)
+        local.setOnClickListener {
+            val intent= Intent(this,Juego::class.java)
+            startActivity(intent)
+        }
         text.setText(user)
         text2.setText(correo)
 

@@ -16,6 +16,9 @@
         <activity
             android:name=".Usuario"
             android:exported="false" />
+      <activity
+            android:name=".Juego"
+            android:exported="true" />
         <activity
             android:name=".Menu"
             android:exported="false" />
