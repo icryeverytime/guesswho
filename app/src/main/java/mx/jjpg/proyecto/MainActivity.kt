@@ -3,6 +3,7 @@ package mx.jjpg.proyecto
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -12,15 +13,15 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.snackbar.Snackbar
+
 import org.json.JSONObject
+import mx.jjpg.proyecto.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val texto:TextView=findViewById(R.id.registro)
-
         val background: LinearLayout =findViewById(R.id.gradiente2)
         val but:Button=findViewById(R.id.login)
         val user:EditText=findViewById(R.id.usuario)
@@ -83,11 +84,12 @@ class MainActivity : AppCompatActivity() {
                             contra.setBackgroundResource(R.drawable.border2)
                         }
                         else{
-                            val intent2=Intent(this,Menu::class.java)
+                            val intent2=Intent(this,mx.jjpg.proyecto.Menu::class.java)
                             intent2.putExtra("usuario",response.getString("number"))
                             intent2.putExtra("pnombre",response.getString("pnombre"))
                             intent2.putExtra("snombre",response.getString("snombre"))
                             intent2.putExtra("correo",response.getString("correo"))
+                            intent2.putExtra("imagen",response.getString("imagen"))
                             startActivity(intent2)
                         }
                     },
