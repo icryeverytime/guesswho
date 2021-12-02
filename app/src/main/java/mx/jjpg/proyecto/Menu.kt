@@ -1,7 +1,9 @@
 package mx.jjpg.proyecto
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class Menu : AppCompatActivity() {
@@ -14,6 +16,11 @@ class Menu : AppCompatActivity() {
         val fname=getIntent().getStringExtra("pnombre")
         val sname=getIntent().getStringExtra("snombre")
         val correo=getIntent().getStringExtra("correo")
+        val local:Button=findViewById(R.id.btnJugarLocal)
+        local.setOnClickListener {
+            val intent= Intent(this,Juego::class.java)
+            startActivity(intent)
+        }
         text.setText(user)
         text2.setText(correo)
     }
