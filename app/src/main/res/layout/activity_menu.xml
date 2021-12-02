@@ -65,17 +65,29 @@
                 android:background="@drawable/linearlayouborder"
                 android:layout_margin="0dp"/>
         </LinearLayout>
-        <Button android:id="@+id/btnJugarMulti"
+        <Button
+            android:id="@+id/btnJugarLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Juego multiplayer"/>
-        <Button android:id="@+id/btnJugarLocal"
+            android:backgroundTint="@color/verdepistashe"
+            android:text="Juego local"
+
+            android:textColor="@color/rosita" />
+
+        <Button
+            android:id="@+id/btnJugarMulti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Juego local"/>
+            android:backgroundTint="@color/verdepistashe"
+            android:text="Juego multiplayer"
+            android:textColor="@color/rosita" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Informacion de como jugar"/>
+            android:backgroundTint="@color/verdepistashe"
+
+            android:text="Informacion de como jugar"
+            android:textColor="@color/rosita" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
