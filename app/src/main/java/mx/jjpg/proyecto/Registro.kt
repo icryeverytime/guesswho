@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.lang.ArithmeticException
 import java.net.Socket
+import mx.jjpg.proyecto.R
 import kotlin.concurrent.thread
 
 class Registro : AppCompatActivity()  {

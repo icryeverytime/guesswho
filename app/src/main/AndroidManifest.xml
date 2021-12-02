@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Proyecto"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Usuario"
+            android:exported="false" />
+        <activity
             android:name=".Menu"
             android:exported="false" />
         <activity
