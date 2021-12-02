@@ -68,7 +68,11 @@ class Registro : AppCompatActivity()  {
         registrar.setOnClickListener{
             val queue = Volley.newRequestQueue(this)
             //val url="http://192.168.110.220:5000/registro"
-            val url = "http://192.168.1.67:5000/registro"
+            //val url = "http://192.168.1.67:5000/registro"
+
+            //hmchi
+            val url = "http://25.83.103.75:5000/registro"
+
             val json=JSONObject()
             json.put("primernombre",primernombre.text.toString())
             json.put("primerapellido",primerapellido.text.toString())
