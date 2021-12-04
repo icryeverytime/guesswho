@@ -34,4 +34,30 @@
     <string name="btnJuegoReiniciar">Reiniciar</string>
     <string name="btnJuegoQuitar">Salir</string>
 
+    <string-array name="nombres">
+        <item>Bowser</item>
+        <item>Captain Falcon</item>
+        <item>Cloud</item>
+        <item>Daisy</item>
+        <item>Donkey Kong</item>
+        <item>Falco</item>
+        <item>Fox</item>
+        <item>Ice Climbers</item>
+        <item>Jigglypuff</item>
+        <item>Kirby</item>
+        <item>Link</item>
+        <item>Luigi</item>
+        <item>Ness</item>
+        <item>Pacman</item>
+        <item>Peach</item>
+        <item>Pichu</item>
+        <item>Pikachu</item>
+        <item>Mario</item>
+        <item>Samus</item>
+        <item>Sheik</item>
+        <item>Sonic</item>
+        <item>Sora</item>
+        <item>Yoshi</item>
+        <item>Zelda</item>
+    </string-array>
 </resources>
