@@ -2,6 +2,8 @@ package mx.jjpg.proyecto;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -9,15 +11,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.*;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Juego extends Activity {
+public class Juego extends Activity implements  AdapterView.OnItemSelectedListener {
 
     // variables para los componentes de la vista
     ImageButton imb00, imb01, imb02, imb03, imb04, imb05, imb06, imb07, imb08, imb09, imb10, imb11, imb12, imb13, imb14, imb15,imb16,imb17,imb18,imb19,imb20,imb21,imb22,imb23,imbMiPer;
@@ -44,7 +51,50 @@ public class Juego extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego);
-        init();
+        Integer num=init();
+        TextView texto=findViewById(R.id.player1);
+        ShapeableImageView dream=findViewById(R.id.player1foto);
+        Intent i=getIntent();
+        String user=i.getStringExtra("usuario");
+        String fname=i.getStringExtra("pnombre");
+        String sname=i.getStringExtra("snombre");
+        String correo=i.getStringExtra("correo");
+        String imagen=i.getStringExtra("imagen");
+        texto.setText(user);
+
+        RecyclerView recyclerview=findViewById(R.id.recyclerview);
+        recyclerview.setLayoutManager(LinearLayout(this));
+        ArrayList data=ArrayList<ItemsViewModel>();
+        data.add(ItemsViewModel("Hola"));
+        recyclerview.setAdapter(CustomAdapter(data));
+
+        Button adiv=findViewById(R.id.adivinar);
+        Spinner spinner=findViewById(R.id.cmbOpciones);
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.nombres, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+        switch(imagen)
+        {
+            case "q":
+                dream.setImageResource(R.drawable.q);
+                break;
+        }
+        Intent intent=new Intent(getApplicationContext(),Menu.class);
+        intent.putExtra("usuario",user);
+        intent.putExtra("pnombre",fname);
+        intent.putExtra("snombre",sname);
+        intent.putExtra("correo",correo);
+        intent.putExtra("imagen",imagen);
+        adiv.setOnClickListener(new View.OnClickListener(){
+            @Override
+                    public void onClick(View v)
+            {
+                String seleccionado=spinner.getSelectedItem().toString();
+                Boolean g=buscar(seleccionado,intent,num);
+            }
+
+        });
     }
 
     private void cargarTablero(){
@@ -109,7 +159,7 @@ public class Juego extends Activity {
         botonReiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                init();
+                init2();
             }
         });
 
@@ -201,7 +251,7 @@ public class Juego extends Activity {
 
     }
 
-    private void init(){
+    private Integer init(){
         cargarTablero();
         cargarBotones();
         cargarTexto();
@@ -220,18 +270,225 @@ public class Juego extends Activity {
         for(int i=0; i<tablero.length; i++) {
         final int j = i;
         tablero[i].setEnabled(true);
-
-
         tablero[i].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 comprobar(j, tablero[j]);
             }
         });
-
-
-    }
+        return arrayDesordenado.get(10);
 
     }
 
+        return null;
+    }
+    private void init2(){
+        cargarTablero();
+        cargarBotones();
+        cargarTexto();
+        cargarImagenes();
+        arrayDeCartas=insertar(imagenes.length);
+        for(int i=0;i< tablero.length;i++)
+        {
+            tablero[i].setScaleType(ImageView.ScaleType.CENTER_CROP);
+            tablero[i].setImageResource(imagenes[arrayDeCartas.get(i)]);
+        }
+        for(int i=0; i<tablero.length; i++) {
+            final int j = i;
+            tablero[i].setEnabled(true);
+            tablero[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    comprobar(j, tablero[j]);
+                }
+            });
+
+
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String text=adapterView.getItemAtPosition(i).toString();
+        Toast.makeText(adapterView.getContext(),text,Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+    public boolean buscar(String en,Intent intent,Integer num)
+    {
+        switch (en)
+        {
+            case "Bowser":
+                if(num==0)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Captain Falcon":
+                if(num==1)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Cloud":
+                if(num==2)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Daisy":
+                if(num==3)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Donkey Kong":
+                if(num==4)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Falco":
+                if(num==5)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Fox":
+                if(num==6)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Ice Climbers":
+                if(num==7)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Jigglypuff":
+                if(num==8)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Kirby":
+                if(num==9)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Link":
+                if(num==10)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Luigi":
+                if(num==11)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Ness":
+                if(num==12)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Pacman":
+                if(num==13)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Peach":
+                if(num==14)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Pichu":
+                if(num==15)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Mario":
+                if(num==16)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+            case "Pikachu":
+                if(num==17)
+                {
+                    intent.putExtra("resultado","ganado");
+                }
+                break;
+            case "Samus":
+                if(num==18)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Sheik":
+                if(num==19)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Sonic":
+                if(num==20)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Sora":
+                if(num==21)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Yoshi":
+                if(num==22)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            case "Zelda":
+                if(num==23)
+                {
+                    intent.putExtra("resultado","ganado");
+                    startActivity(intent);
+                }
+                break;
+            }
+            return true;
+        }
 }
+
