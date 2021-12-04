@@ -14,10 +14,10 @@ class AdaptadorTitulares (private val datos: MutableList<Titular>,
 
     class TitularesViewHolder(val item: View): RecyclerView.ViewHolder(item){
         val lblTitulo: TextView =item.findViewById((R.id.lblTitulo)) as TextView
-
+        val lblSubtitulo:TextView=item.findViewById(R.id.lblSubtitulo) as TextView
         fun bindTitular(titular: Titular){
             lblTitulo.text=titular.titulo
-
+            lblSubtitulo.text=titular.subtitulo
         }
     }
 

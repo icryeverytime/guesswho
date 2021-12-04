@@ -11,7 +11,10 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import mx.jjpg.proyecto.app.personaje
 import java.util.*
+
+
 
 class Juego : Activity(), AdapterView.OnItemSelectedListener {
     // variables para los componentes de la vista
@@ -62,8 +65,8 @@ class Juego : Activity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var recView:RecyclerView
     private lateinit var btnInsertar: Button
-    private lateinit var btnEliminar: Button
-    private lateinit var btnMover: Button
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -111,12 +114,34 @@ super.onCreate(savedInstanceState)
         recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
 
-
+        //el boton que inserta el texto en el chat
         btnInsertar.setOnClickListener{
 
-            datos.add(datos.size, Titular(textoChat.text.toString(),"Subtitulo Nuevo Titular"))
+            datos.add(datos.size, Titular(textoChat.text.toString(),""))
             adaptador.notifyItemInserted(datos.size)
+
+
+            var pers=personaje("", "","","")
+            val g2 = Responder(intent, num,pers)
+
+            if(textoChat.text.toString()=="color?"){
+                datos.add(datos.size, Titular("",pers.colorP))
+            }
+            if(textoChat.text.toString()=="genero?"){
+                datos.add(datos.size, Titular("",pers.generoP))
+            }
+            if(textoChat.text.toString()=="usa armas?"){
+                datos.add(datos.size, Titular("",pers.armasP))
+            }
+            if(textoChat.text.toString()=="es animal?"){
+                datos.add(datos.size, Titular("",pers.animalP))
+            }
+
+
+            adaptador.notifyItemInserted(datos.size)
+
             textoChat.setText("")
+
         }
 
 
@@ -144,6 +169,7 @@ super.onCreate(savedInstanceState)
         adiv.setOnClickListener {
             val seleccionado = spinner.selectedItem.toString()
             val g = buscar(seleccionado, intent, num)
+
         }
     }
 
@@ -173,6 +199,7 @@ super.onCreate(savedInstanceState)
         imb22 = findViewById(R.id.boton22)
         imb23 = findViewById(R.id.boton23)
         imbMiPer = findViewById(R.id.botonMiPersonaje)
+
         tablero[0] = imb00
         tablero[1] = imb01
         tablero[2] = imb02
@@ -238,6 +265,8 @@ super.onCreate(savedInstanceState)
             R.drawable.zelda
         )
         fondo = R.drawable.fondo
+        miCarta=R.drawable.fondo
+
     }
 
     private fun barajar(longitud: Int): ArrayList<Int?> {
@@ -283,7 +312,8 @@ super.onCreate(savedInstanceState)
         }
         //setear la imagen de mi personaje
         imbMiPer!!.scaleType = ImageView.ScaleType.CENTER_CROP
-        imbMiPer!!.setImageResource(imagenes[arrayDesordenado!![10]!!])
+        //imbMiPer!!.setImageResource(imagenes[arrayDesordenado!![10]!!])
+        imbMiPer!!.setImageResource(fondo)
         for (i in tablero.indices) {
             tablero[i]!!.isEnabled = true
             tablero[i]!!.setOnClickListener { comprobar(i, tablero[i]) }
@@ -314,109 +344,375 @@ super.onCreate(savedInstanceState)
     }
 
     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+
+
     fun buscar(en: String?, intent: Intent, num: Int?): Boolean {
+        var victoria=false
+        var nombre= ""
         when (en) {
             "Bowser" -> if (num == 0) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Captain Falcon" -> if (num == 1) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Cloud" -> if (num == 2) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Daisy" -> if (num == 3) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Donkey Kong" -> if (num == 4) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Falco" -> if (num == 5) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Fox" -> if (num == 6) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Ice Climbers" -> if (num == 7) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Jigglypuff" -> if (num == 8) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Kirby" -> if (num == 9) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Link" -> if (num == 10) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Luigi" -> if (num == 11) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Ness" -> if (num == 12) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Pacman" -> if (num == 13) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Peach" -> if (num == 14) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Pichu" -> if (num == 15) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Mario" -> {
                 if (num == 16) {
                     intent.putExtra("resultado", "ganado")
+                    victoria=true
+                    Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                     startActivity(intent)
                 }
                 if (num == 17) {
                     intent.putExtra("resultado", "ganado")
+                    victoria=true
+                    Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 }
             }
             "Pikachu" -> if (num == 17) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
             }
             "Samus" -> if (num == 18) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Sheik" -> if (num == 19) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
+
                 startActivity(intent)
             }
             "Sonic" -> if (num == 20) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Sora" -> if (num == 21) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Yoshi" -> if (num == 22) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
             "Zelda" -> if (num == 23) {
                 intent.putExtra("resultado", "ganado")
+                victoria=true
+                Toast.makeText(this,"Felicidades!!! ganaste!!!!",Toast.LENGTH_LONG).show()
                 startActivity(intent)
             }
+
+
         }
+        if(victoria==false){
+            Toast.makeText(this,"Uy Perdiste :c ",Toast.LENGTH_LONG).show()
+            startActivity(intent)
+        }
+
         return true
+
     }
+
+
+
+    fun Responder(intent: Intent, num: Int?,personaje: personaje): personaje {
+        when (num) {
+            0 -> {//bowser
+                personaje.colorP="El personaje es amarillo"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+            }
+            1 -> {//cap falcon
+
+
+                personaje.colorP="El personaje es purpura"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es animal"
+
+            }
+
+            2-> {//cloud
+
+                personaje.colorP="Tiene pelo amarillo"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es animal"
+
+            }
+            3-> {//daisy
+
+                personaje.colorP="El personaje es amarillo"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+            }
+            4->  { //Donkey kong
+
+                personaje.colorP="El personaje es cafe"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            5-> { //Falco
+
+                personaje.colorP="El personaje es azul"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            6->  { //Fox
+
+                personaje.colorP="El personaje es cafe"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            7-> { //Ice Climbers
+
+                personaje.colorP="El personaje es azul/rosa"
+                personaje.generoP="El personaje es masculino/femenino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            8-> { //jigglypuff
+
+                personaje.colorP="El personaje es rosa"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            9->  { //kirby
+
+                personaje.colorP="El personaje es rosa"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            10-> { //link
+
+                personaje.colorP="El personaje es verde"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            11->  { //Luigi
+
+                personaje.colorP="El personaje es verde"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            12-> { //Ness
+
+                personaje.colorP="El personaje tiene una gorra roja"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            13 ->  { //pacman
+
+                personaje.colorP="El personaje es amarillo"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+           14 -> { //Peach
+
+                personaje.colorP="El personaje es rosa"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            15 ->  { //pichu
+
+                personaje.colorP="El personaje es amarillo"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            16-> { //Mario
+
+                    personaje.colorP="El personaje es rojo"
+                    personaje.generoP="El personaje es masculino"
+                    personaje.armasP="No usa armas"
+                    personaje.animalP="No es un animal"
+
+                }
+
+            17 ->  { //pikachu
+
+                personaje.colorP="El personaje es amarillo"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            18 ->  { //samus
+
+                personaje.colorP="El personaje es naranja"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+            19 ->  { //sheik
+
+
+                personaje.colorP="El personaje usa vendas blancas"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+
+            }
+            20 ->  { //Sonic
+
+                personaje.colorP="El personaje es azul"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+
+            }
+            21 ->  { //Sora
+
+                personaje.colorP="El personaje lleva shorts rojos"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="Si usa armas"
+                personaje.animalP="No es un animal"
+
+            }
+           22->  { //Yoshi
+                personaje.colorP="El personaje es verde"
+                personaje.generoP="El personaje es masculino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="Si es un animal"
+            }
+            23 ->  { //Zelda
+                personaje.colorP="El personaje tiene pelo amarillo"
+                personaje.generoP="El personaje es femenino"
+                personaje.armasP="No usa armas"
+                personaje.animalP="No es un animal"
+            }
+        }
+
+        return personaje
+
+    }
+
 }
+
