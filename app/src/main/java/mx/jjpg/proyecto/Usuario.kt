@@ -3,9 +3,11 @@ package mx.jjpg.proyecto
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import mx.jjpg.proyecto.R
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
+import org.json.JSONObject
 import org.w3c.dom.Text
 
 class Usuario : AppCompatActivity() {
@@ -18,7 +20,7 @@ class Usuario : AppCompatActivity() {
         val texto3:TextView=findViewById(R.id.nom)
         val texto4:TextView=findViewById(R.id.victorias)
         val texto5:TextView=findViewById(R.id.derrotas)
-
+        val but:Button=findViewById(R.id.button)
         val imagen:ShapeableImageView=findViewById(R.id.imagen)
 
         val q:ShapeableImageView=findViewById(R.id.q)
@@ -61,15 +63,32 @@ class Usuario : AppCompatActivity() {
         texto1.setText(correo)
         texto2.setText(user)
         texto3.setText(fname+sname)
-        when(image)
-        {
-            "q"->{
+        var ImagenGuardad=""
+        when(image) {
+            "q" -> {
                 imagen.setImageResource(R.drawable.q)
+                ImagenGuardad="q"
             }
         }
-        var ImagenGuardada=q
+        but.setOnClickListner{
+            val url = "http://25.83.103.75:5000/update"
+
+            val json= JSONObject()
+            json.put("usuario",user.text.toString())
+            json.put("imagen",ImagenGuardad)
+            val jsonObjectRequest = JsonObjectRequest(
+                Request.Method.POST, url, json,
+                Response.Listener { response ->
+                    texto4.setText(response.getString("number"))
+                },
+                Response.ErrorListener { error ->
+                    user.setText(error.toString())
+                }
+            )
+            queue.add(jsonObjectRequest)
+        }
         q.setOnClickListener {
-            ImagenGuardada = q
+            ImagenGuardada = "q"
             q.setStrokeColorResource(R.color.red)
             browser.setStrokeColorResource(R.color.white)
             captainfalcon.setStrokeColorResource(R.color.white)
@@ -98,7 +117,7 @@ class Usuario : AppCompatActivity() {
         }
 
         browser.setOnClickListener {
-            ImagenGuardada = browser
+            ImagenGuardada = "browser"
             browser.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             captainfalcon.setStrokeColorResource(R.color.white)
@@ -126,7 +145,7 @@ class Usuario : AppCompatActivity() {
         }
 
         captainfalcon.setOnClickListener {
-            ImagenGuardada=captainfalcon
+            ImagenGuardada="captainfalcon"
             captainfalcon.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -154,7 +173,7 @@ class Usuario : AppCompatActivity() {
         }
 
         cloud.setOnClickListener {
-            ImagenGuardada= cloud
+            ImagenGuardada= "cloud"
             cloud.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -181,7 +200,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         daisy.setOnClickListener {
-            ImagenGuardada=daisy
+            ImagenGuardada="daisy"
             daisy.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -209,7 +228,7 @@ class Usuario : AppCompatActivity() {
         }
 
         donkeykong.setOnClickListener {
-            ImagenGuardada=donkeykong
+            ImagenGuardada="donkeykong"
             donkeykong.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -236,7 +255,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         falco.setOnClickListener {
-            ImagenGuardada=falco
+            ImagenGuardada="falco"
             falco.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -263,7 +282,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         fox.setOnClickListener {
-            ImagenGuardada=fox
+            ImagenGuardada="fox"
             fox.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -290,7 +309,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         iceclimber.setOnClickListener {
-            ImagenGuardada=iceclimber
+            ImagenGuardada="iceclimber"
             iceclimber.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -317,7 +336,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         jigglypuff.setOnClickListener {
-            ImagenGuardada=jigglypuff
+            ImagenGuardada="jigglypuff"
             jigglypuff.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -344,7 +363,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         kirby.setOnClickListener {
-            ImagenGuardada=kirby
+            ImagenGuardada="kirby"
             kirby.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -371,7 +390,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         link.setOnClickListener {
-            ImagenGuardada=link
+            ImagenGuardada="link"
             link.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -399,7 +418,7 @@ class Usuario : AppCompatActivity() {
         }
 
         luigi.setOnClickListener{
-            ImagenGuardada=luigi
+            ImagenGuardada="luigi"
             luigi.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -426,7 +445,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         ness.setOnClickListener{
-            ImagenGuardada=ness
+            ImagenGuardada="ness"
             ness.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -453,7 +472,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         pacman.setOnClickListener{
-            ImagenGuardada=pacman
+            ImagenGuardada="pacman"
             pacman.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -480,7 +499,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         peach.setOnClickListener{
-            ImagenGuardada=peach
+            ImagenGuardada="peach"
             peach.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -507,7 +526,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         pichu.setOnClickListener{
-            ImagenGuardada=pichu
+            ImagenGuardada="pichu"
             pichu.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -534,7 +553,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         pikachu.setOnClickListener{
-            ImagenGuardada=pikachu
+            ImagenGuardada="pikachu"
             pikachu.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -561,7 +580,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         samus.setOnClickListener{
-            ImagenGuardada=samus
+            ImagenGuardada="samus"
             samus.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -588,7 +607,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         sheik.setOnClickListener{
-            ImagenGuardada=sheik
+            ImagenGuardada="sheik"
             sheik.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -615,7 +634,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         sonic.setOnClickListener{
-            ImagenGuardada=sonic
+            ImagenGuardada="sonic"
             sonic.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -642,7 +661,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         sora.setOnClickListener{
-            ImagenGuardada=sora
+            ImagenGuardada="sora"
             sora.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -669,7 +688,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         yoshi.setOnClickListener{
-            ImagenGuardada=yoshi
+            ImagenGuardada="yoshi"
             yoshi.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
@@ -696,7 +715,7 @@ class Usuario : AppCompatActivity() {
             zelda.setStrokeColorResource(R.color.white)
         }
         zelda.setOnClickListener{
-            ImagenGuardada=zelda
+            ImagenGuardada="zelda"
             zelda.setStrokeColorResource(R.color.red)
             q.setStrokeColorResource(R.color.white)
             browser.setStrokeColorResource(R.color.white)
