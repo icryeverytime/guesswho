@@ -11,6 +11,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
+
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -283,12 +290,7 @@
                         android:layout_height="wrap_content"
                         android:text="Adivinar"/>
                 </LinearLayout>
-                <TextView
-                    android:layout_gravity="right"
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre de persona"/>
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -301,22 +303,51 @@
                             android:layout_height="50dp"
                             android:scrollbars="vertical"
                             android:id="@+id/recyclerview"/>
-                        <EditText
-                            android:layout_width="250dp"
-                            android:layout_height="50dp"
-                            android:layout_weight="3"
-                            android:layout_marginLeft="2dp"
-                            android:background="@drawable/border"
-                            android:maxLength="100"
-                            />
+
                         <Button
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_weight="1"
                             />
+
+
+
+
+
+
                     </LinearLayout>
                 </ScrollView>
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/recView"
+                android:background="@drawable/border"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText android:id="@+id/EdTxtChat"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:layout_marginLeft="2dp"
+                    android:background="@drawable/border"
+                    android:maxLength="100"
+                    />
+
+                <Button android:id="@+id/btnInsertar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enviar"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
