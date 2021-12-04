@@ -52,9 +52,9 @@ class Menu : AppCompatActivity() {
         text2.setText(correo)
 
         val boton:Button=findViewById(R.id.botonInfo)
-            boton.setOnClickListener(){
-            Toast.makeText(applicationContext,"Las instrucciones son sencillas. Para ser el ganador del juego usted debe de adivinar el personaje de su rival, mediante una serie de preguntas.",Toast.LENGTH_LONG).show()
-
+            boton.setOnClickListener{
+            val intent=Intent(this, Info::class.java)
+                startActivity(intent)
         }
 
 
