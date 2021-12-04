@@ -13,4 +13,14 @@
         android:layout_marginLeft="5dp"
         />
 
+    <TextView
+        android:id="@+id/lblSubtitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textSize="24sp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/rosita"
+        />
+
 </LinearLayout>
