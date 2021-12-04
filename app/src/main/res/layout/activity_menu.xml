@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/verdepistashe"
-
+            android:id="@+id/botonInfo"
             android:text="Informacion de como jugar"
             android:textColor="@color/rosita" />
     </LinearLayout>
