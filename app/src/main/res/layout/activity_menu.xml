@@ -58,12 +58,7 @@
                     android:id="@+id/perfil"
                     app:shapeAppearanceOverlay="@style/ShapeAppearance.CircularBorder" />
             </LinearLayout>
-            <ImageView
-                android:layout_width="71dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/settings"
-                android:background="@drawable/linearlayouborder"
-                android:layout_margin="0dp"/>
+
         </LinearLayout>
         <Button
             android:id="@+id/btnJugarLocal"
