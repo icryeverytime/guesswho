@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Proyecto"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Info"
+            android:exported="true" />
+        <activity
             android:name=".JuegoMulti"
             android:exported="true" />
         <activity
