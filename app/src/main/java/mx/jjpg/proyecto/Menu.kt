@@ -25,9 +25,18 @@ class Menu : AppCompatActivity() {
         val correo=getIntent().getStringExtra("correo")
         val imagen=getIntent().getStringExtra("imagen")
         val local:Button=findViewById(R.id.btnJugarLocal)
+        val multijugador:Button=findViewById(R.id.btnJugarMulti)
         local.setOnClickListener {
             val intent= Intent(this,Juego::class.java)
+            intent.putExtra("usuario",user)
+            intent.putExtra("pnombre",fname)
+            intent.putExtra("snombre",sname)
+            intent.putExtra("correo",correo)
+            intent.putExtra("imagen",imagen)
             startActivity(intent)
+        }
+        multijugador.setOnClickListener {
+
         }
         text.setText(user)
         text2.setText(correo)
