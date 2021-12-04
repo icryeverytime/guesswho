@@ -11,7 +11,19 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.io.OutputStream
+import java.net.ServerSocket
+import java.net.Socket
 import java.util.*
+import kotlin.concurrent.thread
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+
 
 class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
     // variables para los componentes de la vista
@@ -46,7 +58,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
     var textoPuntuacion: TextView? = null
     var aciertos = 0
 
-    //imagenes
+    //imagenesq
     //var imagenes=null: IntArray
     var imagenes = arrayOf<Int>()
     var fondo = 0
@@ -84,11 +96,18 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         val textoChat = findViewById<TextView>(R.id.EdTxtChat)
         texto.text = user
 
+        val policy = ThreadPolicy.Builder().permitAll().build()
+
+        StrictMode.setThreadPolicy(policy)
+
         btnInsertar=findViewById(R.id.btnInsertar)
 
 
+        CoroutineScope(IO).launch {
+            client(user,imagen,num)
+        }
 
-
+        /*
         recView=findViewById(R.id.recView)
         val datos =
             MutableList(0){i->Titular("Titulo $i","Subtitulo Item $i")}
@@ -109,8 +128,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         recView.adapter=adaptador
 
         recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-
+        recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))qqqqqqqqqqq
 
         btnInsertar.setOnClickListener{
 
@@ -118,10 +136,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
             adaptador.notifyItemInserted(datos.size)
             textoChat.setText("")
         }
-
-
-
-
+*/
         val adiv = findViewById<Button>(R.id.adivinar)
         val spinner = findViewById<Spinner>(R.id.cmbOpciones)
         val adapter = ArrayAdapter.createFromResource(
@@ -146,7 +161,101 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
             val g = buscar(seleccionado, intent, num)
         }
     }
+    private var active:Boolean=false
+    private var data:String=""
+    private suspend fun client(user:String?,imagen:String?,num:Int?)
+    {
+        val textoChat = findViewById<TextView>(R.id.EdTxtChat)
+        recView=findViewById(R.id.recView)
+        val datos =
+            MutableList(0){i->Titular("Titulo $i","Subtitulo Item $i")}
 
+        //val adaptador= AdaptadorTitulares(datos)
+        val adaptador= AdaptadorTitulares(datos){
+            Toast.makeText(this,"pulsado el elemento: ${it.titulo}",Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+        recView.setHasFixedSize(true)
+        //recView.layoutManager=
+        //    LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recView.layoutManager= GridLayoutManager(this,1)
+
+        recView.adapter=adaptador
+
+        recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+
+
+
+        val connection=Socket("25.83.103.75",8080)
+        val writer=DataOutputStream(connection.getOutputStream())
+        val dIn=DataInputStream(connection.getInputStream())
+
+
+        writer.writeByte(1)
+        writer.writeUTF(user)
+        writer.flush()
+
+        writer.writeByte(2)
+        writer.writeUTF(imagen)
+        writer.flush()
+
+        writer.writeByte(3)
+        writer.writeUTF(num.toString())
+        writer.flush()
+
+        thread{
+            btnInsertar.setOnClickListener{
+
+                datos.add(datos.size, Titular(textoChat.text.toString(),"Subtitulo Nuevo Titular"))
+                adaptador.notifyItemInserted(datos.size)
+                writer.writeByte(4)
+                writer.writeUTF(textoChat.text.toString())
+                writer.flush()
+                textoChat.setText("")
+            }
+        }
+        while (true)
+        {
+            val byte=dIn.readByte()
+            when(byte)
+            {
+                "1".toByte()->{
+                    val usuario2:String=dIn.readUTF()
+                    val text:TextView=findViewById(R.id.player2)
+                    text.setText(usuario2)
+                }
+                "2".toByte()->{
+                    println("Imagen: "+dIn.readUTF())
+                }
+                "3".toByte()->{
+                    println("Numero: "+dIn.readUTF())
+                }
+                "4".toByte()->{
+                    println("chat: "+dIn.readUTF())
+                }
+            }
+        }
+       /*
+        val reader=Scanner(connection.getInputStream())
+        while(active)
+        {
+            var input=""
+            input=reader.nextLine()
+            if(data.length <300)
+            {
+                data+="\n$input"
+            }
+            else{
+                data=input
+            }
+            datos.add(datos.size, Titular(data,"Subtitulo Nuevo Titular"))
+            adaptador.notifyItemInserted(datos.size)
+        }*/
+    }
     private fun cargarTablero() {
         imb00 = findViewById(R.id.boton00)
         imb01 = findViewById(R.id.boton01)
