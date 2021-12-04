@@ -25,7 +25,7 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Registro"
+                android:text="Login"
                 android:textSize="26sp"/>
         </LinearLayout>
         <ScrollView
@@ -76,7 +76,7 @@
                         android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Contrasena"
+                        android:text="Contraseña"
                         android:labelFor="@+id/contra"
                         />
                     <TextView
@@ -98,13 +98,15 @@
                     android:inputType="textPassword"
                     android:maxLength="100"
                     />
+
                 <Button
-                    android:layout_gravity="center"
+                    android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/login"
-                    android:text="@string/registro"
-                    />
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/verdepistashe"
+                    android:textColor="@color/rosita"
+                    android:text="@string/login" />
                 <TextView
                     android:layout_marginTop="10dp"
                     android:textColor="@color/white"

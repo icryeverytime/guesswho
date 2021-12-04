@@ -10,7 +10,8 @@
     <color name="red">#FF0000</color>
     <color name="lightblue">#add8e6</color>
     <color name="grey">#808080</color>
-
+    <color name="verdepistashe">#90b083</color>
+    <color name="rosita">#FFDAC1</color>
     <color name="start">#764BA2</color>
     <color name="end">#667EEA</color>
 </resources>
