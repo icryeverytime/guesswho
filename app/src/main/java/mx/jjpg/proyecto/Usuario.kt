@@ -67,7 +67,7 @@ class Usuario : AppCompatActivity() {
                 imagen.setImageResource(R.drawable.q)
             }
         }
-        var ImagenGuardada
+        var ImagenGuardada=q
         q.setOnClickListener {
             ImagenGuardada = q
             q.setStrokeColorResource(R.color.red)
