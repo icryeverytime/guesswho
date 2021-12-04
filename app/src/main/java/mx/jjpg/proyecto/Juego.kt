@@ -138,7 +138,7 @@ super.onCreate(savedInstanceState)
             }
 
 
-            adaptador.notifyItemInserted(datos.size)
+            //adaptador.notifyItemInserted(datos.size)
 
             textoChat.setText("")
 
@@ -508,6 +508,8 @@ super.onCreate(savedInstanceState)
         if(victoria==false){
             Toast.makeText(this,"Uy Perdiste :c ",Toast.LENGTH_LONG).show()
             startActivity(intent)
+        }else{
+            //ContVictorias++
         }
 
         return true

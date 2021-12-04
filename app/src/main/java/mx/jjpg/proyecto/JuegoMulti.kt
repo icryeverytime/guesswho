@@ -74,8 +74,8 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var recView:RecyclerView
     private lateinit var btnInsertar: Button
-    private lateinit var btnEliminar: Button
-    private lateinit var btnMover: Button
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -138,7 +138,10 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         }
 */
         val adiv = findViewById<Button>(R.id.adivinar)
+        adiv.visibility=View.GONE
         val spinner = findViewById<Spinner>(R.id.cmbOpciones)
+        spinner.visibility=View.GONE
+
         val adapter = ArrayAdapter.createFromResource(
             this,
             R.array.nombres,
@@ -156,10 +159,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         intent.putExtra("snombre", sname)
         intent.putExtra("correo", correo)
         intent.putExtra("imagen", imagen)
-        adiv.setOnClickListener {
-            val seleccionado = spinner.selectedItem.toString()
-            val g = buscar(seleccionado, intent, num)
-        }
+
     }
     private var active:Boolean=false
     private var data:String=""
@@ -169,7 +169,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         recView=findViewById(R.id.recView)
         val datos =
             MutableList(0){i->Titular("Titulo $i","Subtitulo Item $i")}
-
+        val adiv = findViewById<Button>(R.id.adivinar)
         //val adaptador= AdaptadorTitulares(datos)
         val adaptador= AdaptadorTitulares(datos){
             Toast.makeText(this,"pulsado el elemento: ${it.titulo}",Toast.LENGTH_SHORT).show()
@@ -210,7 +210,7 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
         thread{
             btnInsertar.setOnClickListener{
 
-                datos.add(datos.size, Titular(textoChat.text.toString(),"Subtitulo Nuevo Titular"))
+                datos.add(datos.size, Titular(textoChat.text.toString(),""))
                 adaptador.notifyItemInserted(datos.size)
                 writer.writeByte(4)
                 writer.writeUTF(textoChat.text.toString())
@@ -225,17 +225,25 @@ class JuegoMulti : Activity(), AdapterView.OnItemSelectedListener {
             {
                 "1".toByte()->{
                     val usuario2:String=dIn.readUTF()
-                    val text:TextView=findViewById(R.id.player2)
-                    text.setText(usuario2)
+                    //val text:TextView=findViewById(R.id.player2)
+                    //text.setText(usuario2)
+
                 }
                 "2".toByte()->{
                     println("Imagen: "+dIn.readUTF())
                 }
                 "3".toByte()->{
-                    println("Numero: "+dIn.readUTF())
+                    //println("Numero: "+dIn.readUTF())
+                    adiv.setOnClickListener {
+                        val spinner = findViewById<Spinner>(R.id.cmbOpciones)
+                        val seleccionado = spinner.selectedItem.toString()
+                        val g = buscar(seleccionado, intent, dIn.readUTF().toInt())
+                    }
                 }
                 "4".toByte()->{
-                    println("chat: "+dIn.readUTF())
+                    //println("chat: "+dIn.readUTF())
+                    datos.add(datos.size, Titular("",dIn.readUTF()))
+                    adaptador.notifyItemInserted(datos.size)
                 }
             }
         }
